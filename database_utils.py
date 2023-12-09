@@ -6,7 +6,6 @@ from data_extraction import DataExtractor
 from data_cleaning import DataCleaning
 
 
-
 class DatabaseConnector:
     def __init__(self):
         self.file_path = '/Users/yasir/Documents/Multinational_Retail_Data/Multinational_Retail_Data/db_creds.yaml'
