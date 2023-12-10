@@ -28,25 +28,74 @@ class DatabaseConnector:
     def upload_to_db(self, df, table_name, engine):
         df.to_sql(table_name, engine, if_exists='replace', index=False) 
 
-import warnings
 
-warnings.filterwarnings("ignore")
+
+print('DEFINING CLASSES')
+db_connector = DatabaseConnector()
+data_extractor = DataExtractor()
+data_cleaning = DataCleaning()
+
+##################   MILESTONE 2 TASK 3   #################
 
 print('CONNECTING TO DB')
-db_connector = DatabaseConnector()
 creds = db_connector.read_db_creds()
 aicore_db_engine = db_connector.init_db_engine(creds['RDS_USER'], creds['RDS_PASSWORD'],creds['RDS_HOST'],creds['RDS_PORT'],creds['RDS_DATABASE'])
 
-print('CLEANING DATA')
-tables_list = db_connector.list_db_tables(aicore_db_engine)
-table_name = tables_list[1]
-df = DataExtractor().read_rds_table(db_connector, table_name)
-df_cleaned = DataCleaning().clean_user_data(df)
+# print('CLEANING DATA')
+# tables_list = db_connector.list_db_tables(aicore_db_engine)
+# table_name = tables_list[1]
+# df = DataExtractor().read_rds_table(db_connector, table_name)
+# df_cleaned = DataCleaning().clean_user_data(df)
 
-print('UPLOADING CLEANED DATA TO MY LOCAL DB')
+# print('UPLOADING CLEANED DATA TO MY LOCAL DB')
 my_db_engine = db_connector.init_db_engine(creds['MY_USER'],creds['MY_PASSWORD'],creds['MY_HOST'],creds['MY_PORT'],creds['MY_DATABASE'] )
-db_connector.upload_to_db(df_cleaned, 'dim_users', my_db_engine)
-print('DONE')
+# db_connector.upload_to_db(df_cleaned, 'dim_users', my_db_engine)
+# print('UPLOADED TO LOCAL DB')
+
+##################   MILESTONE 2 TASK 4    #################
+
+# print('READING IN TABULA PDF CARD DATA')
+# pdf_df = data_extractor.retrieve_pdf_data()
+
+# print('CLEANING PDF CARD DATA')
+# pdf_cleaned = data_cleaning.clean_card_data(pdf_df)
+# print('PDF CARD DATA CLEANED')
+
+# print('UPLOADING PDF DATA TO MY LOCAL DB')
+# db_connector.upload_to_db(pdf_cleaned, 'dim_card_details', my_db_engine)
+# print('UPLOADED')
+
+###################      MILESTONE 2 TASK 5     #################
+
+# print('RETRIEVE STORE DATA')
+# store_data_df = data_extractor.retrieve_stores_data()
+# print('CLEAN STORE DATA')
+# store_data_cleaned = data_cleaning.clean_store_data(store_data_df)
+
+# print('UPLOADING STORE DATA TO MY LOCAL DB')
+# db_connector.upload_to_db(store_data_cleaned, 'dim_store_details', my_db_engine)
+# print('UPLOADED')
+
+####################     MILESTONE 2 TASK 6    #################
+
+# print('RETRIEVE PRODUCTS DATA')
+# product_df = data_extractor.extract_from_s3()
+# print('CLEAN PRODUCTS DATA')
+# product_data_cleaned = data_cleaning.convert_product_weights(product_df)
+
+# print('UPLOADING PRODUCTS DATA TO MY LOCAL DB')
+# db_connector.upload_to_db(product_data_cleaned, 'dim_products', my_db_engine)
+# print('UPLOADED')
+
+
+
+
+
+
+
+
+
+
 
 
 
