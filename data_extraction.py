@@ -65,10 +65,6 @@ class DataExtractor:
 # print(e.list_number_of_stores())
 # print(e.retrieve_stores_data())
 
-s3_df = DataExtractor().extract_from_s3()
-print(s3_df)
-df = DataCleaning().convert_product_weights(s3_df)
-print(df)
 
 
 

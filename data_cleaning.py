@@ -71,4 +71,8 @@ class DataCleaning:
 
     ################# M2 T7
 
+    def clean_orders_data():
+        pass
+    
+
 
