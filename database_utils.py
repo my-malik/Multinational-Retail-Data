@@ -24,7 +24,7 @@ class DatabaseConnector:
 
     def list_db_tables(self, engine):
         inspector = inspect(engine)
-        return inspector.get_table_names()
+        return inspector.get_table_names() #if inspector.get_table_names() else ["No table found"]
 
     def upload_to_db(self, df, table_name, engine):
         df.to_sql(table_name, engine, if_exists='replace', index=False) 
@@ -37,12 +37,12 @@ data_extractor = DataExtractor()
 data_cleaning = DataCleaning()
 
 
-
 ##################   MILESTONE 2 TASK 3   #################
 
 # print('CONNECTING TO DB')
 # creds = db_connector.read_db_creds()
 # aicore_db_engine = db_connector.init_db_engine(creds['RDS_USER'], creds['RDS_PASSWORD'],creds['RDS_HOST'],creds['RDS_PORT'],creds['RDS_DATABASE'])
+
 
 # print('CLEANING DATA')
 # tables_list = db_connector.list_db_tables(aicore_db_engine)
@@ -114,7 +114,11 @@ print('UPLOADED TO LOCAL DB')
 
 
 
-
+# try:
+#     # aicore_db_engine = db_connector.init_db_engine(creds['RDS_USER'], creds['RDS_PASSWORD'], creds['RDS_HOST'], creds['RDS_PORT'], creds['RDS_DATABASE'])
+#     tables_list = db_connector.list_db_tables(aicore_db_engine)
+# except Exception as e:
+#     print(f"Error connecting to the database: {e}")
 
 
 
