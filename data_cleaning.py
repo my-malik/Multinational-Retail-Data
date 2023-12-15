@@ -73,6 +73,21 @@ class DataCleaning:
 
     def clean_orders_data():
         pass
+
+    ################# M2 T8
+
+    def clean_events_data(self,df):
+        df['timestamp'] = pd.to_datetime(df['timestamp'], format='%H:%M:%S', errors='ignore')
+        df['combined_date'] = pd.to_datetime(df[['year','month','day']], errors='coerce')
+        df = df.dropna()
+
+        return df
+    
+
+
+
+
+
     
 
 

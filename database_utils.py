@@ -66,6 +66,8 @@ data_cleaning = DataCleaning()
 # print('PDF CARD DATA CLEANED')
 
 # print('UPLOADING PDF DATA TO MY LOCAL DB')
+# creds = db_connector.read_db_creds()
+# my_db_engine = db_connector.init_db_engine(creds['MY_USER'],creds['MY_PASSWORD'],creds['MY_HOST'],creds['MY_PORT'],creds['MY_DATABASE'] )
 # db_connector.upload_to_db(pdf_cleaned, 'dim_card_details', my_db_engine)
 # print('UPLOADED')
 
@@ -93,32 +95,38 @@ data_cleaning = DataCleaning()
 
 # ###################     MILESTONE 2 TASK 7    #################
 
-print('CONNECTING TO DB')
+# print('CONNECTING TO DB')
+# creds = db_connector.read_db_creds()
+# aicore_db_engine = db_connector.init_db_engine(creds['RDS_USER'], creds['RDS_PASSWORD'],creds['RDS_HOST'],creds['RDS_PORT'],creds['RDS_DATABASE'])
+
+# print('CLEANING DATA')
+# tables_list = db_connector.list_db_tables(aicore_db_engine)
+# table_name = tables_list[2]
+# print(table_name)
+# df = DataExtractor().read_rds_table(db_connector, table_name)
+# df_cleaned = DataCleaning().clean_orders_data(df)
+
+# print('UPLOADING CLEANED DATA TO MY LOCAL DB')
+# my_db_engine = db_connector.init_db_engine(creds['MY_USER'],creds['MY_PASSWORD'],creds['MY_HOST'],creds['MY_PORT'],creds['MY_DATABASE'] )
+# db_connector.upload_to_db(df_cleaned, 'orders_table', my_db_engine)
+# print('UPLOADED TO LOCAL DB')
+
+
+###################     MILESTONE 2 TASK 8    #################
+
+print('RETRIEVE EVENTS DATA')
+events_df = data_extractor.retreive_events_data()
+print('CLEAN EVENTS DATA')
+events_data_cleaned = data_cleaning.clean_events_data(events_df)
+
+print('UPLOADING EVENTS DATA TO MY LOCAL DB')
 creds = db_connector.read_db_creds()
-aicore_db_engine = db_connector.init_db_engine(creds['RDS_USER'], creds['RDS_PASSWORD'],creds['RDS_HOST'],creds['RDS_PORT'],creds['RDS_DATABASE'])
-
-print('CLEANING DATA')
-tables_list = db_connector.list_db_tables(aicore_db_engine)
-table_name = tables_list[2]
-print(table_name)
-df = DataExtractor().read_rds_table(db_connector, table_name)
-df_cleaned = DataCleaning().clean_orders_data(df)
-
-print('UPLOADING CLEANED DATA TO MY LOCAL DB')
 my_db_engine = db_connector.init_db_engine(creds['MY_USER'],creds['MY_PASSWORD'],creds['MY_HOST'],creds['MY_PORT'],creds['MY_DATABASE'] )
-db_connector.upload_to_db(df_cleaned, 'orders_table', my_db_engine)
-print('UPLOADED TO LOCAL DB')
+db_connector.upload_to_db(events_data_cleaned, 'dim_date_times', my_db_engine)
+print('UPLOADED')
 
 
 
-
-
-
-# try:
-#     # aicore_db_engine = db_connector.init_db_engine(creds['RDS_USER'], creds['RDS_PASSWORD'], creds['RDS_HOST'], creds['RDS_PORT'], creds['RDS_DATABASE'])
-#     tables_list = db_connector.list_db_tables(aicore_db_engine)
-# except Exception as e:
-#     print(f"Error connecting to the database: {e}")
 
 
 

@@ -59,11 +59,27 @@ class DataExtractor:
         s3_df = pd.read_csv(response.get("Body"))
         return s3_df
     
+    ################# M2 T7
 
 
-# e = DataExtractor()
-# print(e.list_number_of_stores())
-# print(e.retrieve_stores_data())
+    def retreive_events_data(self):
+        url = 'https://data-handling-public.s3.eu-west-1.amazonaws.com/date_details.json'
+        response = requests.get(url)
+        json_response = response.json()
+        df = pd.DataFrame([])
+
+        for col in json_response.keys():
+            val_list = []
+
+            for i in json_response[col].keys():
+                val_list.append(json_response[col][i])
+            
+            df[col] = val_list
+
+        return df 
+
+
+
 
 
 
