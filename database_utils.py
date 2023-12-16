@@ -1,3 +1,5 @@
+import gc
+gc.enable()
 import yaml
 import psycopg2
 from sqlalchemy import inspect
@@ -77,6 +79,7 @@ data_cleaning = DataCleaning()
 # store_data_df = data_extractor.retrieve_stores_data()
 # print('CLEAN STORE DATA')
 # store_data_cleaned = data_cleaning.clean_store_data(store_data_df)
+# store_data_cleaned.to_csv('store_data2.csv')
 
 # print('UPLOADING STORE DATA TO MY LOCAL DB')
 # db_connector.upload_to_db(store_data_cleaned, 'dim_store_details', my_db_engine)
@@ -105,6 +108,7 @@ data_cleaning = DataCleaning()
 # print(table_name)
 # df = DataExtractor().read_rds_table(db_connector, table_name)
 # df_cleaned = DataCleaning().clean_orders_data(df)
+# df_cleaned.to_csv('order_table.csv')
 
 # print('UPLOADING CLEANED DATA TO MY LOCAL DB')
 # my_db_engine = db_connector.init_db_engine(creds['MY_USER'],creds['MY_PASSWORD'],creds['MY_HOST'],creds['MY_PORT'],creds['MY_DATABASE'] )
@@ -114,16 +118,17 @@ data_cleaning = DataCleaning()
 
 ###################     MILESTONE 2 TASK 8    #################
 
-print('RETRIEVE EVENTS DATA')
-events_df = data_extractor.retreive_events_data()
-print('CLEAN EVENTS DATA')
-events_data_cleaned = data_cleaning.clean_events_data(events_df)
+# print('RETRIEVE EVENTS DATA')
+# events_df = data_extractor.retreive_events_data()
+# print('CLEAN EVENTS DATA')
+# events_data_cleaned = data_cleaning.clean_events_data(events_df)
 
-print('UPLOADING EVENTS DATA TO MY LOCAL DB')
-creds = db_connector.read_db_creds()
-my_db_engine = db_connector.init_db_engine(creds['MY_USER'],creds['MY_PASSWORD'],creds['MY_HOST'],creds['MY_PORT'],creds['MY_DATABASE'] )
-db_connector.upload_to_db(events_data_cleaned, 'dim_date_times', my_db_engine)
-print('UPLOADED')
+# print('UPLOADING EVENTS DATA TO MY LOCAL DB')
+# creds = db_connector.read_db_creds()
+# my_db_engine = db_connector.init_db_engine(creds['MY_USER'],creds['MY_PASSWORD'],creds['MY_HOST'],creds['MY_PORT'],creds['MY_DATABASE'] )
+# db_connector.upload_to_db(events_data_cleaned, 'dim_date_times', my_db_engine)
+# print('UPLOADED')
+
 
 
 

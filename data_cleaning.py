@@ -71,8 +71,11 @@ class DataCleaning:
 
     ################# M2 T7
 
-    def clean_orders_data():
-        pass
+    def clean_orders_data(self,df):
+        remove_columns = ['first_name','last_name','1']
+        df = df.drop(columns=remove_columns, errors='ignore')
+
+        return df
 
     ################# M2 T8
 
