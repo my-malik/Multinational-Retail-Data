@@ -1,5 +1,3 @@
-# from data_extraction import *
-# from database_utensils import *
 import pandas as pd
 import numpy as np
 
@@ -47,7 +45,6 @@ class DataCleaning:
         if isinstance(weight, float):
             return weight
         elif 'x' in weight:
-            # Handle the case of '12 x 100'
             quantity = float(weight.split('x')[0].strip())
             if 'g' in weight:
                 weight = float(weight.split('x')[1].replace('g', '').strip())

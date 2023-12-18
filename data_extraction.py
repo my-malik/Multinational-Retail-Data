@@ -1,10 +1,8 @@
 import pandas as pd
 import requests
 import boto3
-# from database_utils import DatabaseConnector
 from sqlalchemy import inspect
 import tabula
-
 from data_cleaning import DataCleaning
 
 
@@ -13,7 +11,6 @@ class DataExtractor:
     def __init__(self):
         pass
 
-
     def read_rds_table(self, db_connector, table_name):
         creds = db_connector.read_db_creds()
         engine = db_connector.init_db_engine(creds['RDS_USER'], creds['RDS_PASSWORD'],creds['RDS_HOST'],creds['RDS_PORT'],creds['RDS_DATABASE'])
@@ -21,7 +18,6 @@ class DataExtractor:
         df = pd.read_sql(query, engine)
         return df        
     
-    # DataExtractor().read_rds_table(db_connector,table_name)
 
     ##################  M2 T4
 
